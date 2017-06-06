@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">BasicProject</string>
+    <string name="password">senha</string>
+    <string name="enter">Logar</string>
+    <string name="user">Usuário</string>
+
+    <!-- Login Act -->
+    <string name="failed_password">Senha incorreta</string>
+
+    <!-- Details Act -->
+    <string name="toolbar_name">Detalhes</string>
+</resources>
