@@ -27,7 +27,7 @@ android {
                 includeNoLocationClasses = true
             }
         }
-    }6
+    }
 }
 
 // Enable the coverage of unit test
