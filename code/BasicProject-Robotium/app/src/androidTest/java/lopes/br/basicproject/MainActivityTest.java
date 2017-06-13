@@ -20,21 +20,28 @@
  */
 package lopes.br.basicproject;
 
+
+import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.RenamingDelegatingContext;
 
 import com.robotium.solo.Solo;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import lopes.br.basicproject.ui.HomeActivity;
 import lopes.br.basicproject.ui.MainActivity;
+import lopes.br.basicproject.util.Constants;
 import lopes.br.basicproject.util.SharedPref;
+
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
@@ -42,32 +49,59 @@ public class MainActivityTest {
     private static final String MOCK_CONTEXT_NAME = "_test";
 
     private Solo solo;
-    private RenamingDelegatingContext mockContext;
-    private SharedPref sharedPref;
+    private static SharedPref sharedPref;
 
     // Configure the Activity under test
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule =
-            new ActivityTestRule<>(MainActivity.class);
+            new ActivityTestRule<>(MainActivity.class, false, false);
+
+    @BeforeClass
+    public static void setUpStatic() {
+        sharedPref = SharedPref.getInstance();
+    }
 
     @Before
     public void setUp() {
-        // Configure the mock context without using mockito
-        mockContext =  new RenamingDelegatingContext(InstrumentationRegistry.getTargetContext(), MOCK_CONTEXT_NAME);
-
-        // Set the mocked context into the custom SharedPreferences
-        sharedPref = SharedPref.getInstance();
-        sharedPref.setContext(mockContext);
+        // Clear all sharedPreferences
+        sharedPref.clearSharedPref();
 
         // Get a reference of Robotium´s class
-        solo = new Solo(InstrumentationRegistry.getInstrumentation(),
+        solo = new Solo(getInstrumentation(),
                 activityTestRule.getActivity());
     }
 
     @Test
     public void success_login_test() {
-        // TODO - finish later
+        fillAllRequiredFields(Constants.USER, Constants.PASSWORD, HomeActivity.class);
     }
+
+    @Test
+    public void fail_login_test() {
+        fillAllRequiredFields(Constants.USER, Constants.WRONG_PASSWORD, MainActivity.class);
+    }
+
+    private void fillAllRequiredFields(@NonNull String user, @NonNull String password, @NonNull Class<? extends Activity> activity) {
+        //Start Manually the Activity
+        activityTestRule.launchActivity(null);
+
+        //Unlock the lock screen
+        solo.unlockScreen();
+
+        //Send the USERNAME to the EditText
+        solo.typeText(0, user);
+
+        //Send the PASSWORD to the EditText
+        solo.typeText(1, password);
+
+        // Click on Login button
+        String btnTxt = InstrumentationRegistry.getTargetContext().getString(R.string.enter);
+        solo.clickOnButton(btnTxt);
+
+        //Check if the MainActivity was opened
+        solo.assertCurrentActivity("Wrong Activity", activity);
+    }
+
 
     @After
     public void tearDown() {

@@ -70,7 +70,7 @@ public class SharedPref {
     }
 
     /**
-     * Return if the user alredy logged into the system
+     * Return if the USER alredy logged into the system
      *
      * @return boolean
      */
@@ -80,7 +80,7 @@ public class SharedPref {
 
 
     /**
-     * Set when the user enter in the system
+     * Set when the USER enter in the system
      *
      * @param isLogged isLogged
      */

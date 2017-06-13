@@ -38,14 +38,19 @@ public class Constants {
     public static final String PREFIX_TITLE = "Title ";
 
     /**
-     * The constant user.
+     * The constant USER.
      */
-    public static final String user = "thiagolsilva";
+    public static final String USER = "thiagolsilva";
 
     /**
      * The constant PASSWORD.
      */
     public static final String PASSWORD = "password123";
+
+    /**
+     * The constant WRONG_PASSWORD.
+     */
+    public static final String WRONG_PASSWORD = "password";
 
     /**
      * The constant EMPTY_STRING.

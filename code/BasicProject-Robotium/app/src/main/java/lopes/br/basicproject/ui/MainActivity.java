@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         this.loginBtn.setOnClickListener(loginListener);
     }
 
-    // validate if the user + password are valid
+    // validate if the USER + password are valid
     private void validateAllFields() {
         final String user = this.userLayout.getEditText().getText().toString();
         final String password = this.passwordLayout.getEditText().getText().toString();
