@@ -92,6 +92,35 @@ public class MainActivityTest {
         solo.searchText(wrongPasswordHint);
     }
 
+    @Test
+    public void success_login_with_photo_test() {
+        //Start Manually the Activity
+        activityTestRule.launchActivity(null);
+
+        //Unlock the lock screen
+        solo.unlockScreen();
+
+        //Send the USERNAME to the EditText
+        solo.typeText(0, Constants.USER);
+
+        solo.takeScreenshot();
+
+        //Send the PASSWORD to the EditText
+        solo.typeText(1, Constants.PASSWORD);
+
+        solo.takeScreenshot();
+
+        // Click on Login button
+        String btnTxt = InstrumentationRegistry.getTargetContext().getString(R.string.enter);
+        solo.clickOnButton(btnTxt);
+
+        solo.takeScreenshot();
+
+        //Check if the MainActivity was opened
+        solo.assertCurrentActivity("Wrong Activity", HomeActivity.class);
+
+    }
+
     private void fillAllRequiredFields(@NonNull String user, @NonNull String password, @NonNull Class<? extends Activity> activity, boolean shouldAssert) {
         //Start Manually the Activity
         activityTestRule.launchActivity(null);
@@ -114,6 +143,7 @@ public class MainActivityTest {
             solo.assertCurrentActivity("Wrong Activity", activity);
         }
     }
+
 
     private void fillAllRequiredFields(@NonNull String user, @NonNull String password, @NonNull Class<? extends Activity> activity) {
         fillAllRequiredFields(user, password, activity, true);
