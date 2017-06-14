@@ -5,6 +5,9 @@
     <!-- This permission is used by picasso load all images -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- this permission is used to take photos on tets-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
