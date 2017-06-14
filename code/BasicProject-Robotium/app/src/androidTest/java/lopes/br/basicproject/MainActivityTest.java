@@ -81,7 +81,18 @@ public class MainActivityTest {
         fillAllRequiredFields(Constants.USER, Constants.WRONG_PASSWORD, MainActivity.class);
     }
 
-    private void fillAllRequiredFields(@NonNull String user, @NonNull String password, @NonNull Class<? extends Activity> activity) {
+    @Test
+    public void should_show_error_message_test() {
+        // Fill all required fields
+        fillAllRequiredFields(Constants.USER, Constants.WRONG_PASSWORD);
+
+        // Get the hint of failed password attempt
+        String wrongPasswordHint = InstrumentationRegistry.getTargetContext().getString(R.string.failed_password);
+
+        solo.searchText(wrongPasswordHint);
+    }
+
+    private void fillAllRequiredFields(@NonNull String user, @NonNull String password, @NonNull Class<? extends Activity> activity, boolean shouldAssert) {
         //Start Manually the Activity
         activityTestRule.launchActivity(null);
 
@@ -98,8 +109,18 @@ public class MainActivityTest {
         String btnTxt = InstrumentationRegistry.getTargetContext().getString(R.string.enter);
         solo.clickOnButton(btnTxt);
 
-        //Check if the MainActivity was opened
-        solo.assertCurrentActivity("Wrong Activity", activity);
+        if (shouldAssert && activity != null) {
+            //Check if the MainActivity was opened
+            solo.assertCurrentActivity("Wrong Activity", activity);
+        }
+    }
+
+    private void fillAllRequiredFields(@NonNull String user, @NonNull String password, @NonNull Class<? extends Activity> activity) {
+        fillAllRequiredFields(user, password, activity, true);
+    }
+
+    private void fillAllRequiredFields(@NonNull String user, @NonNull String password) {
+        fillAllRequiredFields(user, password, null, false);
     }
 
 
