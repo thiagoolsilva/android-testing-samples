@@ -37,7 +37,7 @@ public class ValidatorController {
             return false;
         }
 
-        // Check if the hard coded user and password match
-        return user.equalsIgnoreCase(Constants.user) && password.equalsIgnoreCase(Constants.PASSWORD);
+        // Check if the hard coded USER and password match
+        return user.equalsIgnoreCase(Constants.USER) && password.equalsIgnoreCase(Constants.PASSWORD);
     }
 }

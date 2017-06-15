@@ -53,7 +53,7 @@ public class SharedPrefTest {
 
         // retrieve the result of login
         final boolean isLogged = mockedPref.isUserLogged();
-        Assert.assertTrue("The user is not logged", isLogged);
+        Assert.assertTrue("The USER is not logged", isLogged);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -65,7 +65,7 @@ public class SharedPrefTest {
 
         // retrieve the result of login
         final boolean isLogged = mockedPref.isUserLogged();
-        Assert.assertFalse("The user is logged", isLogged);
+        Assert.assertFalse("The USER is logged", isLogged);
     }
 
     @Test(expected = NullPointerException.class)
