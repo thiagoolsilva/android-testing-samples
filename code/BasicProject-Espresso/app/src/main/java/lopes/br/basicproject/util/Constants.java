@@ -57,7 +57,15 @@ public class Constants {
      */
     public static final String EMPTY_STRING = "";
 
+    /**
+     * The constant IMAGE_URL.
+     */
     public static final String IMAGE_URL = "https://unsplash.it/300/300/?random";
+
+    /**
+     * The constant TIME_OUT_2_SECONDS.
+     */
+    public static final int TIME_OUT_2_SECONDS = 2000;
 
     /**
      * The type Shared preference.
