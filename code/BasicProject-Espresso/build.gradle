@@ -15,9 +15,19 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+
+ext {
+    runnerVersion = "1.0.0"
+    rulesVersion = "1.0.0"
+    espressoVersion = "3.0.1"
 }
